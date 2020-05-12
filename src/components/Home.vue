@@ -44,6 +44,10 @@ export default {
         {
           text: '表单',
           route:'/Form'
+        },
+        {
+          text: '组件',
+          route:'/Template'
         }
       ]
     }

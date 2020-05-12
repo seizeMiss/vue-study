@@ -6,6 +6,7 @@ import Component from '@/components/Component'
 import Lifecycle from '@/components/Lifecycle'
 import Directives from '@/components/Directives'
 import Form from '@/components/Form'
+import Template from '@/components/Template'
 import Home from '@/components/Home'
 
 Vue.use(Router)
@@ -46,6 +47,10 @@ export default new Router({
           path: '/Form',
           name: 'form',
           component: Form,
+        },{
+          path: '/Template',
+          name: 'template',
+          component: Template,
         },
       ]
 

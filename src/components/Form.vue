@@ -46,17 +46,36 @@
     <span>Selected: {{ selected }}</span>
     <br />
     <p>---------------Vue-select选择框------------------</p>
-    <v-select :options="optionList"></v-select>
-    <span>Selected: {{ selected }}</span>
+    <v-select :options="optionList" v-model="vueSelected"></v-select>
+    <span>Selected: {{ vueSelected }}</span>
     <br />
     <p>---------------多选选择框 @input="selected_student"------------------</p>
-    <v-select :placeholder="placeholder"
-              multiple
-              :options="options"
-              label="name"
-              v-model="students"></v-select>
+    <v-select
+      :placeholder="placeholder"
+      multiple
+      :options="options"
+      label="name"
+      v-model="students"
+    ></v-select>
     <div id="value">{{students}}</div>
     <div id="value">{{students_id}}</div>
+    <br />
+    <p>--------复选框------</p>
+    <input type="checkbox" v-model="toggle" true-value="yes" false-value="no" id="toggle" />
+    <label for="toggle">{{toggle}}</label>
+    <p>是否选中：{{toggle}}</p>
+    <br />
+    <p>--------lazy------</p>
+    <input v-model.lazy="lay_msg" />
+    <p>lay_msg is: {{ lay_msg }}</p>
+    <br />
+    <p>-------- number -- 只能填写 number ------</p>
+    <input v-model.number="number_msg" type="number" />
+    <p>number_msg is: {{ number_msg }}</p>
+    <br />
+    <p>-------- trim --------</p>
+    <input v-model.trim="trim_msg" />
+    <p>trim_msg is: {{ trim_msg }}</p>
     <br />
   </div>
 </template>
@@ -68,18 +87,23 @@ import "vue-select/dist/vue-select.css";
 
 export default {
   name: 'form',
-  components:{
+  components: {
     vSelect
   },
   data() {
     return {
       message: '',
+      lay_msg: '',
+      number_msg: '',
+      trim_msg: '',
       text: '',
       checked: false,
       checkedNames: [],
       picked: '',
       selected: '',
-      optionList:['A','B','C'],
+      vueSelected: '',
+      toggle: '',
+      optionList: ['A', 'B', 'C'],
       options: [
         { "student_id": 1, "name": "Vence" },
         { "student_id": 2, "name": "Job" },
@@ -89,27 +113,27 @@ export default {
       students: [],
     }
   },
-  computed:{
-    students_id:function(){
+  computed: {
+    students_id: function () {
       let objs = [];
-      for(var val of this.students){
+      for (var val of this.students) {
         objs.push(val.student_id);
       }
       return objs;
     }
   }
- /*  mounted:function(){
-    var student_filter = function(obj){
-      return this.students.indexOf(obj.student_id) > -1;
-    }
-    this.student_obj = this.options.filter(student_filter, this);
-  },
-  methods:{
-    selected_student:function(values){
-      this.students = values.map(function(obj){
-        return obj.student_id;
-      });
-    }
-  } */
+  /*  mounted:function(){
+     var student_filter = function(obj){
+       return this.students.indexOf(obj.student_id) > -1;
+     }
+     this.student_obj = this.options.filter(student_filter, this);
+   },
+   methods:{
+     selected_student:function(values){
+       this.students = values.map(function(obj){
+         return obj.student_id;
+       });
+     }
+   } */
 }
 </script>

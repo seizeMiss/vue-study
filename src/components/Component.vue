@@ -60,6 +60,7 @@ data.message = 'other component';
 data.groceryList.push({id:3,text:'牛奶'});
 // data.groceryList.reverse();
 data.groceryList = data.groceryList.filter(function(val){
+
   return val.id>2;
 });
 Vue.set(data.groceryList, data.groceryList.length, {id:5, text:'水果'});
