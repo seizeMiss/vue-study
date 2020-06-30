@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <!-- 只渲染一次 -->
+    <p>--------------------只渲染一次,值不再发生变化-----------------------</p>
     <h3 v-once>{{message}}</h3>
     <input
+      class="layui-input"
       type="text"
       v-bind:value="message"
       v-on:focus="focusInput"
@@ -10,27 +11,42 @@
       placeholder="请输入内容"
     />
     <br />
-    <br />
+    <p>--------------------绑定class-----------------------</p>
     <div v-bind:class="{btext:sepText,aurora:!showGround}">{{message}}</div>
     <div v-bind:class="{btext:sepText,aurora:showGround}">{{message}}</div>
     <div v-bind:class="styleEffect">{{message}}</div>
     <div :class="[isColor ? colorA : colorB]">{{message}}</div>
-    <button @click.right="rightMethod" @click.middle="middleMethod" @click="leftMethod">{{message}}</button>
+    <p>--------------------绑定鼠标右、中、左键-----------------------</p>
+    <button
+      class="layui-btn layui-btn-normal"
+      @click.right="rightMethod"
+      @click.middle="middleMethod"
+      @click="leftMethod"
+    >{{message}}</button>
+    <p>--------------------循环-----------------------</p>
     <ul>
       <li v-for="value in objs">{{value}}</li>
     </ul>
     <ul>
       <li v-for="(value, key, index) in objs">{{index}}:{{key}}:{{value}}</li>
     </ul>
+    <p>--------------------computed-----------------------</p>
     <div>{{fullName}}</div>
-    <span>{{company}}</span><br />
-    <span>emp1:{{emp1}}</span><br />
+    <p>--------------------方法(watch)-----------------------</p>
+    <span>{{company}}</span>
+    <br />
+    <span>emp1:{{emp1}}</span>
+    <br />
     <span>emp2:{{emp2}}</span>
     <br />
-    <input type="button" @click="changeCompany" value="点我" /><br>
-    输入:<input type="text" v-model="message"><br> <!-- v-model 实现数据的双向绑定 -->
-    <div>{{message}}</div>
-    输入:<input type="text" v-model.lazy="message"><br> <!-- v-model 加上lazy等失去焦点才改变 -->
+    <el-button @click="changeCompany">点我</el-button>
+    <p>--------------------v-model和懒加载-----------------------</p>
+    <br />
+    输入：<el-input type="text" v-model="message" />
+    <br />
+    懒加载：<input class="layui-input" v-model.lazy="message" />
+    <!-- v-model 实现数据的双向绑定 -->
+    <!-- v-model 加上lazy等失去焦点才改变 -->
     <div>{{message}}</div>
   </div>
 </template>
@@ -90,17 +106,17 @@ export default {
       this.message = '鼠标左键';
       layer.msg('已点击鼠标左键');
     },
-    changeCompany(){
+    changeCompany() {
       this.company = '东北F2';
     }
   },
-  computed: { // 某些属性的计算得到的结果
+  computed: { // 某些属性的计算得到的结果,有缓存
     fullName: function () {
       return this.objs.firstName + " " + this.objs.lastName;
     }
   },
-  watch:{ // 通常用于某一个数据可能影响多个数据的值时
-    company:function(newCompany){
+  watch: { // 通常用于某一个数据可能影响多个数据的值时
+    company: function (newCompany) {
       this.emp1 = newCompany + '-赵四';
       this.emp2 = newCompany + '-刘能';
     }

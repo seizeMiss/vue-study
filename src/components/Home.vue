@@ -48,6 +48,10 @@ export default {
         {
           text: '组件',
           route:'/Template'
+        },
+        {
+          text: '路由',
+          route:'/RouterTest'
         }
       ]
     }

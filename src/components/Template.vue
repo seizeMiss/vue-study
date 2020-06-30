@@ -44,7 +44,7 @@ Vue.component('button-counter', {
 });
 
 Vue.component('blog-post', {
-  props: ['title', 'content'],
+  props: {title:String, content:String},
   template: '<div><h3>{{ title }}</h3><p>{{ content }}</p></div>'
 })
 

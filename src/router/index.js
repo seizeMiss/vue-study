@@ -7,6 +7,7 @@ import Lifecycle from '@/components/Lifecycle'
 import Directives from '@/components/Directives'
 import Form from '@/components/Form'
 import Template from '@/components/Template'
+import RouterTest from '@/components/RouterTest'
 import Home from '@/components/Home'
 
 Vue.use(Router)
@@ -51,6 +52,10 @@ export default new Router({
           path: '/Template',
           name: 'template',
           component: Template,
+        },{
+          path: '/RouterTest',
+          name: 'routertest',
+          component: RouterTest,
         },
       ]
 
