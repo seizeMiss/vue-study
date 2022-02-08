@@ -10,6 +10,7 @@ import './css/index.css'
 
 // 导入less文件
 import './css/index.less'
+import './js/info'
 
 // 导入图片文件
 import logo from './image/logo.png'
@@ -20,3 +21,13 @@ $(function () {
     $('li:odd').css('background-color', 'blue')
     $('li:even').css('background-color', 'green')
 })
+
+
+function info(target) {
+    target.info = 'Person info'
+}
+
+@info
+class Person{}
+
+console.log(Person.info)
