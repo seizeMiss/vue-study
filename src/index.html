@@ -23,5 +23,15 @@
  </ul>
 
 <img src="" class="box">
+<div id="app">{{ username }}</div>
+<script>
+import Vue from 'vue'
+const vm = new Vue({
+    el: '#app',
+    data: {
+        username: 'zhangsan'
+    }
+})
+</script>
 </body>
 </html>
