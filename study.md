@@ -41,7 +41,7 @@
 
 #### 1.指令
 
-- 内容渲染指令
+- ##### 内容渲染指令
 
   ​	v-text: 覆盖元素的默认值
 
@@ -49,25 +49,71 @@
 
   ​	v-html: 可以渲染包含html的内容
 
-- 属性绑定指令
+- ##### 属性绑定指令
 
   > 注意：插值表达式只能用在元素的节点中，不能用在属性节点中
 
   在 vue 中，可以使用 v-bind: 指令，为元素动态绑定值
 
-  可以使用 : 作为简写
+  可以使用 : 作为简写，是单向绑定指令
 
   在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如
 
-  ```javascript
+  ```html
   <div :title="'box' + index">这是一个div</div>
   ```
 
   
 
-- 事件绑定指令
+- ##### 事件绑定指令
 
-- 双向绑定指令
+  v-on 绑定事件，可以使用 @ 代替
 
+  $event: 远程 DOM 的事件对象，让方法可以传递本身的事件对象
 
+  应用场景：如果默认的时间对象 e 被覆盖了，则可以手动传递一个 $event。
 
+  ```html
+  <button @click='add(n, $event)'></button>
+  
+  methods: {
+  	add(n, e) {
+  		e.preventDefault()
+  		this.count += n
+  	}
+  }
+  ```
+
+  事件修饰符：例如 @click.prevent
+
+  .prevent 阻止默认行为
+
+  ```html
+  <a @click.prevent='xxx'></a>
+  ```
+
+  .stop 阻止事件冒泡，例如阻止点击事件冒泡，内外层同时声明点击事件，点击内部事件，外部事件也被执行
+
+  ```html
+  <a @click.stop ='xxx'></a>
+  ```
+
+  按键修饰符
+
+  @keyup.esc @keyup.enter 等
+
+- ##### 双向绑定指令
+
+  v-model: 在不操作 DOM 数据的条件下，快速获取表单的数据
+
+  适用于表单元素：input textarea select
+
+  v-model 修饰符
+
+  .number: 将用户输入的内容转成 number
+
+  .trim: 自动过滤用户输入的前后空白字符
+
+  .lazy: 在 change 时而非 input 时更新，减缓更新
+
+  
