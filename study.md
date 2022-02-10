@@ -41,79 +41,101 @@
 
 #### 1.指令
 
-- ##### 内容渲染指令
+##### 1.内容渲染指令
 
-  ​	v-text: 覆盖元素的默认值
+​	v-text: 覆盖元素的默认值
 
-  ​	{{}}(插值表达式): 只是内容的占位符，不会覆盖原来的内容呢
+​	{{}}(插值表达式): 只是内容的占位符，不会覆盖原来的内容呢
 
-  ​	v-html: 可以渲染包含html的内容
+​	v-html: 可以渲染包含html的内容
 
-- ##### 属性绑定指令
+##### 2.属性绑定指令
 
-  > 注意：插值表达式只能用在元素的节点中，不能用在属性节点中
+> 注意：插值表达式只能用在元素的节点中，不能用在属性节点中
 
-  在 vue 中，可以使用 v-bind: 指令，为元素动态绑定值
+在 vue 中，可以使用 v-bind: 指令，为元素动态绑定值
 
-  可以使用 : 作为简写，是单向绑定指令
+可以使用 : 作为简写，是单向绑定指令
 
-  在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如
+在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如
 
-  ```html
-  <div :title="'box' + index">这是一个div</div>
-  ```
+```html
+<div :title="'box' + index">这是一个div</div>
+```
 
-  
 
-- ##### 事件绑定指令
 
-  v-on 绑定事件，可以使用 @ 代替
+##### 3.事件绑定指令
 
-  $event: 远程 DOM 的事件对象，让方法可以传递本身的事件对象
+v-on 绑定事件，可以使用 @ 代替
 
-  应用场景：如果默认的时间对象 e 被覆盖了，则可以手动传递一个 $event。
+$event: 远程 DOM 的事件对象，让方法可以传递本身的事件对象
 
-  ```html
-  <button @click='add(n, $event)'></button>
-  
-  methods: {
-  	add(n, e) {
-  		e.preventDefault()
-  		this.count += n
-  	}
-  }
-  ```
+应用场景：如果默认的时间对象 e 被覆盖了，则可以手动传递一个 $event。
 
-  事件修饰符：例如 @click.prevent
+```html
+<button @click='add(n, $event)'></button>
 
-  .prevent 阻止默认行为
+methods: {
+	add(n, e) {
+		e.preventDefault()
+		this.count += n
+	}
+}
+```
 
-  ```html
-  <a @click.prevent='xxx'></a>
-  ```
+事件修饰符：例如 @click.prevent
 
-  .stop 阻止事件冒泡，例如阻止点击事件冒泡，内外层同时声明点击事件，点击内部事件，外部事件也被执行
+.prevent 阻止默认行为
 
-  ```html
-  <a @click.stop ='xxx'></a>
-  ```
+```html
+<a @click.prevent='xxx'></a>
+```
 
-  按键修饰符
+.stop 阻止事件冒泡，例如阻止点击事件冒泡，内外层同时声明点击事件，点击内部事件，外部事件也被执行
 
-  @keyup.esc @keyup.enter 等
+```html
+<a @click.stop ='xxx'></a>
+```
 
-- ##### 双向绑定指令
+按键修饰符
 
-  v-model: 在不操作 DOM 数据的条件下，快速获取表单的数据
+@keyup.esc @keyup.enter 等
 
-  适用于表单元素：input textarea select
+##### 4.双向绑定指令
 
-  v-model 修饰符
+v-model: 在不操作 DOM 数据的条件下，快速获取表单的数据
 
-  .number: 将用户输入的内容转成 number
+适用于表单元素：input textarea select
 
-  .trim: 自动过滤用户输入的前后空白字符
+v-model 修饰符
 
-  .lazy: 在 change 时而非 input 时更新，减缓更新
+.number: 将用户输入的内容转成 number
 
-  
+.trim: 自动过滤用户输入的前后空白字符
+
+.lazy: 在 change 时而非 input 时更新，减缓更新
+
+##### 5.条件渲染指令
+
+1.v-show 的原理是：动态为元素添加或者移除 display：none 样式，实现元素的显示和隐藏
+
+> 如果要频繁的显示和隐藏使用v-show性能会好些
+
+2.v-if 的原理是：每次动态创建或者移除元素，实现元素的显示和隐藏
+
+> 如果进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能不需要被展示出来，此时v-if性能会好一些
+
+3.在实际开发中，绝大多数情况，不用考虑性能问题，直接使用v-if
+
+##### 6.列表渲染指令
+
+v-for 示例 v-for=“(item, index) in list”
+
+> 官方建议，如果使用 v-for 指令，那么一定绑定一个 :key 属性（既提高性能，又防止列表状态混乱），
+>
+> 而且，尽量把 id 作为 key 的值, key的类型只能是字符串或者整型类型
+>
+> key的值是不能重复的
+>
+> index的值当做 key 的值没有任何意义，跟内容没有一一绑定，会代码超出预期的情况
