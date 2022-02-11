@@ -139,3 +139,28 @@ v-for 示例 v-for=“(item, index) in list”
 > key的值是不能重复的
 >
 > index的值当做 key 的值没有任何意义，跟内容没有一一绑定，会代码超出预期的情况
+
+#### 2.过滤器
+
+应用场景：插值表达值 和 v-bind 属性绑定
+
+1.要定义到 filters 节点下，本质是一个函数
+
+2.在过滤器函数中，一定要有return 值
+
+3.
+
+
+
+私有过滤器
+
+
+
+全局过滤器：多个vue实例之间共享过滤器
+
+```js
+Vue.filter('capitalize', (str) => {
+    return str.chatAt(0).toUpperCase() + str.slice(1)
+})
+```
+
