@@ -148,7 +148,7 @@ v-for 示例 v-for=“(item, index) in list”
 
 2.在过滤器函数中，一定要有return 值
 
-3.
+3.在过滤器的形参中，就可以获取到 “|” 前面待处理的那个值
 
 
 
@@ -162,5 +162,46 @@ v-for 示例 v-for=“(item, index) in list”
 Vue.filter('capitalize', (str) => {
     return str.chatAt(0).toUpperCase() + str.slice(1)
 })
+```
+
+4.如果全局过滤器和私有过滤器名字一直，此时按照“就近原则”，调用的是私有过滤器
+
+#### 3.侦听器
+
+侦听器本质是一个函数，监听那个变量的变化，就是用那个变量的变量名作为watch里面的方法名
+
+```javascript
+// 侦听器定义的位置
+watch: {
+	username(newVal, oldVal)() {
+		console.log(newVal, oldVal)
+	} 
+}
+```
+
+应用场景：实时请求后台，查看用户名是否存在
+
+1.方法格式的侦听器
+
+> 缺点1：无法在刚进入页面的时候，自动触发
+>
+> 缺点2：如果侦听的是一个对象，如果对象中的属性发生了变化，不会触发侦听器
+
+2.对象格式的侦听器
+
+> 好处：可以通过**immediate** 选项，让侦听器自动触发
+>
+> 侦听对象时，如果属性发生变化，都会触发侦听器
+
+```javascript
+username: {
+	handler: function(newVal, oldVal) {
+		console(newVal, oldVal)
+	},
+    // 默认 false, 控制侦听器自动触发一次
+	immediate: true,
+    // 开启深度监听，只要对象的属性发生了变化，都会触发“对象侦听器”
+    deep: true
+}
 ```
 
