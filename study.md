@@ -173,7 +173,7 @@ Vue.filter('capitalize', (str) => {
 ```javascript
 // 侦听器定义的位置
 watch: {
-	username(newVal, oldVal)() {
+	username(newVal, oldVal) {
 		console.log(newVal, oldVal)
 	} 
 }
@@ -204,4 +204,79 @@ username: {
     deep: true
 }
 ```
+
+侦听对象子属性的变化，必须包裹一层单引号
+
+```javascript
+'info.username'(newVal) {
+	console.log(newVal)
+}
+```
+
+#### 4.计算属性
+
+计算属性定义的时候，要定义成方法格式
+
+```javascript
+// 计算属性定义的位置
+computed: {
+	rgb() {
+		return `rgb(${this.r}, ${this.g}, ${this.b})`
+	} 
+}
+```
+
+在使用计算属性的时候，当做普通的属性使用即可
+
+好处：
+
+1.实现了代码的附庸
+
+2.只要计算属性的依赖数据源发生了变化，自动属性会重新求值
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
