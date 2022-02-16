@@ -234,15 +234,40 @@ computed: {
 
 2.只要计算属性的依赖数据源发生了变化，自动属性会重新求值
 
+#### 5.axios
 
+> 调用axios方法得到的是一个 Promise 对象
 
+##### 基本使用
 
+1.发起GET请求
 
+```javascript
+axios({
+    method: 'GET',
+    url: 'xxx',
+    params: {}
+}).then(function(res) {
+    console.log(res)
+});
+```
 
+2.发起POST请求  
 
-
-
-
+```javascript
+// 如果调用某个方法的返回值是 Promise 实例，则前面可以添加 await
+// await 只能用在被 async 修饰的方法中
+// 解构赋值的时候，使用 ：重命名
+const { data : res } = await axios({
+    method: 'POST',
+    url: 'xxx',
+    data: {
+        name: 'zs',
+        age: 20
+    }
+});
+console.log(res.data)
+```
 
 
 
