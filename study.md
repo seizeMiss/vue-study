@@ -271,13 +271,40 @@ console.log(res.data)
 
 
 
+### Vue-cli 的使用
+
+#### 基础
+
+1.在终端下运行如下命令，创建指定名称的项目：
+
+```
+vue create 项目名称
+```
+
+2.vue项目中src目录构成：
+
+```
+assets 文件夹： 存放项目中用到的静态资源文件，例如：css样式表、图片资源
+components 文件夹：封装的，可复用的组件,，都放在该目录下
+main.js: 是项目的入口文件，整个项目的运行，要先执行 main.js
+App.vue 是项目的根组件
+```
+
+3.vue项目的运行流程
+
+通过main.js 把 App.vue 渲染到 index.html 的指定区域中
 
 
 
+#### Vue 组件
 
+三个组成部分
 
+**template**： 组件的模板结构
 
+**script**： 组件的javascript行为
 
+**style**： 组件的样式
 
 
 

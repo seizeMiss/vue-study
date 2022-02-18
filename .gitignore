@@ -2,3 +2,6 @@
 /node_modules
 package-lock.json
 /.idea
+/vue-cli-test/dist
+/vue-cli-test/node_modules
+/vue-cli-test/package-lock.json
