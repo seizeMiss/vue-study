@@ -298,9 +298,9 @@ App.vue 是项目的根组件
 
 #### Vue 组件
 
-三个组成部分
+##### 三个组成部分
 
-**template**： 组件的模板结构
+**template**： 组件的模板结构，需要外层包含仅仅一个 DIV
 
 **script**： 组件的javascript行为
 
@@ -308,11 +308,134 @@ App.vue 是项目的根组件
 
 
 
+##### 父子组件传值
+
+###### 父传子
+
+子组件定义
+
+```javascript
+// props 是"自定义属性"，允许使用者通过自定义属性，为当前组件指定初始值
+// 自定义属性的名字，是封装者自定义的（只要名称合法即可）
+// props 中的数据，可以直接在模板结构中被使用
+// 注意：props 是只读的，不要直接修改 props 的值，否则终端会报错！
+// 要修改props的值，只需要把该值传到 data 中即可 
+props: {
+    // 自定义属性A : { /* 配置选项 */ },
+    // 自定义属性B : { /* 配置选项 */ },
+    // 自定义属性C : { /* 配置选项 */ },
+    init: {
+      // 如果外界使用 Count 组件的时候，没有传递 init 属性，则默认值生效
+      default: 0,
+      // init 的值类型必须是 Number 数字
+      type: Number,
+      // 必填项校验
+      required: true
+    }
+  }
+```
+
+父组件可以通过在子组件的标签中设置属性就可以就行传值
+
+> 注意： 单页面程序，组件间会存在样式冲突
+>
+> 解决：可以在子组件设置样式为 scope
+
+###### 子传父
+
+子组件向父组件共享数据使用自定义事件
+
+```javascript
+
+export default {
+    data() {
+        return {
+            msg: 'Hello Vue.js'
+        }
+    },
+    methods: {
+        sendMsg() {
+            this.$emit('share', this.msg)
+        }
+    }
+}
+```
+
+```javascript
+<Son @share='getMessage'>
+
+export default {
+    data() {
+        return {
+            msgFromSon: ''
+        }
+    },
+    methods: {
+        getMessage(msg) {
+            this.msgFromSon = val
+        }
+    }
+}
+```
 
 
 
+###### 兄弟组件
+
+1.创建eventBus.js 模块， 并向外共享一个 Vue 实例对象
+
+```javascript
+import Vue from 'vue'
+export default new Vue()
+```
+
+2.在数据发送方，调用 bus.$emit('事件名称', 要发送的数据)方法触发自定义事件
+
+```javascript
+import bus from './eventBus.js'
+export default {
+    data() {
+        return {
+            msg: 'Hello Vue.js'
+        }
+    },
+    methods: {
+        sendMsg() {
+            bus.$emit('share', this.msg)
+        }
+    }
+}
+```
 
 
+
+3.在数据接收方，调用 bus.$on('事件名称', 事件处理函数)方法注册一个自定义事件
+
+```javascript
+import bus from './eventBus.js'
+export default {
+    data() {
+        return {
+            msgFromLeft: ''
+        }
+    },
+    created() {
+        bus.$on('share', val => {
+        this.msgFromLeft = val
+    	})
+    }
+}
+```
+
+
+
+##### 生命周期
+
+创建阶段 --> 更新阶段 --> 销毁阶段
+
+图示：
+
+![](D:\study\front\vue-study\lifecycle.png)
 
 
 

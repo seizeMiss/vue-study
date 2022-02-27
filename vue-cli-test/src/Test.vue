@@ -1,6 +1,9 @@
 <template>
-  <div class="text-box">这是一个 Test 页面 -- {{ username }}</div>
-  <button @click="changeName">修改用户名</button>
+  <div class="text-box">
+    <h3>这是一个 Test 页面 -- {{ username }}</h3>
+    <button @click="changeName">修改用户名</button>
+  </div>
+
 </template>
 
 <script>
@@ -27,8 +30,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .text-box {
   background-color: pink;
+  h3 {
+    color: #42b983;
+  }
 }
 </style>
